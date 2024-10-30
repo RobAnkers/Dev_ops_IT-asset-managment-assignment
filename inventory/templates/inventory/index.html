@@ -1,0 +1,20 @@
+<!--index.html -->
+{% extends 'inventory/base.html' %}
+
+{% block content %}
+<div>
+	<div class="row">
+		<div class="col-sm-11 col-md-4 mx-auto mt-5 px-3">
+            <!-- Title for the page -->
+			<h1 class="fw-dark">Track Your Assigned Inventory</h1>
+			<p class="fw-light">Keep track of any inventory that has been assigned and receive 
+                quantity alerts for low inventory</p>
+
+			<div>
+                <!-- Button to navigate to dashboard -->
+				<a href="{% url 'dashboard' %}" class="btn btn-primary">Get Started Now!</a>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock content %}

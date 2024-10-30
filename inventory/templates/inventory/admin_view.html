@@ -1,0 +1,47 @@
+<!-- Admin_view.html -->
+{% extends 'inventory/base.html' %}
+
+{% block content %}
+    <!-- Title for the admin view page -->
+    <h1>Admin View</h1>
+    <!-- Table to display users and their assigned equipment -->
+    <table class="table">
+        <thead>
+            <tr>
+                <!-- Column for displaying usernames -->
+                <th>Username</th>
+                <!-- Column for displaying assigned equipment -->
+                <th>Assigned Equipment</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Loop through each user and their items -->
+            {% for user, items in user_items.items %}
+                <tr>
+                    <!-- Display the user's username -->
+                    <td>{{ user.username }}</td>
+                    <td>
+                        <!-- Unordered list to display each item -->
+                        <ul>
+                            <!-- Loop through each item assigned to the user -->
+                            {% for item in items %}
+                                <!-- List item for displaying the item's Manufacturer name, quantity, and type -->
+                                <li>Manufacturer Name: {{ item.name }}<br> 
+                                    Type: {{ item.category }}<br> 
+                                    Quantity Assigned: {{ item.quantity }}<br>
+                                    <!-- When was Item assigned and edited -->
+                                    Assigned on: {{ item.date_created }}
+                                    Last Edited: {{ item.last_edited }}<br>
+                                <br>
+                                </li>
+                            {% empty %}
+                                <!-- If no items are assigned, display message -->
+                                <li>No items assigned to {{ user.username }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}

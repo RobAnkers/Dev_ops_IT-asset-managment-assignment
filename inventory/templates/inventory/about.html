@@ -1,0 +1,49 @@
+<!--about.html -->
+{% extends 'inventory/base.html' %}
+
+{% block content %}
+    
+<h1>About the Inventory Management System</h1>
+<p>Welcome to the Inventory Management System, a powerful tool designed to streamline the process of 
+    managing inventory for UHNM IM&T department. This system is built with Django, 
+    a high-level Python web framework that encourages rapid development and clean, pragmatic design. (Django, 2019) 
+    <!-- (Django, 2019) --></p>
+<h2>Key Features</h2>
+<ul>
+	<li>
+		<strong>User Registration and Authentication:</strong> 
+            The system supports user registration and login, ensuring that only 
+            authorised users can access the inventory management features.
+	</li>
+	<li>
+		<strong>Inventory Management:</strong> Users can add, edit, and check
+            inventory items, making it easy to keep track of stock levels and manage inventory efficiently.
+            Admin Users can add, edit, check and delete inventory items.
+	</li>
+	<li>
+		<strong>Low Inventory Alerts:</strong> The system automatically checks for items with low stock
+            levels ( 3 and below) and displays alerts to users, helping to prevent stock shortages and ensure that
+            inventory is always up-to-date.
+	</li>
+	<li>
+		<strong>Admin View:</strong> Administrators have access to a special view that allows them to see all 
+            users and their assigned inventory items, providing a comprehensive overview of inventory distribution.
+	</li>
+	<li>
+		<strong>Automatic Testing:</strong> An automated testing framework has been set up to ensure the reliability 
+            and stability of the application. This includes unit tests for models and views, as well as 
+            integration tests to simulate user interactions.
+	</li>
+</ul>
+<h2>Why Choose The Inventory Management System?</h2>
+<p>The Inventory Management System is designed with simplicity and efficiency in mind. 
+        It provides a user-friendly interface that makes managing inventory simple, 
+        even for those with little technical experience. With features like automatic alerts for low stock levels and a
+        dedicated admin view, the system is tailored to meet the needs of the UHNM when looking to streamline
+        the inventory management processes.</p>
+<h2>Contact Us</h2>
+<p>If you have any questions, feedback, or need assistance with the Inventory Management System, 
+        please feel free to contact program support. We're here to help! Program support:email support@xxxx.com Phone +44 xxxxxxxxxxxxxx</p>
+<!-- Back button to the previous page-->
+<a href="{% url 'dashboard' %}" class="btn btn-outline-primary">Back</a>
+{% endblock content %}

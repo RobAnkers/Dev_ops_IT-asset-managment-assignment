@@ -1,0 +1,37 @@
+<!--item_form.html -->
+{% extends 'inventory/base.html' %}
+ <!--  (Forms have never been this crispy — django-crispy-forms 1.9.1 documentation, no date)   -->
+{% load crispy_forms_filters %} 
+
+{% block content %}
+    <!-- Link to go back to dashboard -->
+	<a href="{% url 'dashboard' %}" class="btn btn-outline-primary my-3 mx-4">Go Back</a>
+    <!-- Form for adding inventory item -->
+	<div class="row">
+		<div class="col-11 col-md-4 mx-auto mt-5">
+			
+            <!-- Title for the form -->
+            <h1>Add Inventory Item</h1>
+            <!-- Display messages -->
+            {% if messages %}
+                <div class="alert alert-success" role="alert">
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <!-- Form for adding item -->
+			<form method="POST">
+                <!-- Stop Cross-Site Request Forgery in the forms -->
+				{% csrf_token %}
+                <!-- Display the form with crispy forms -->
+				{{ form|crispy }}
+
+				<div class="mt-3">
+                    <!-- Button to submit the form -->
+					<button class="btn btn-primary">Add Item</button>
+				</div>
+			</form>
+		</div>
+	</div>
+{% endblock content %}

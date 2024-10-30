@@ -1,0 +1,29 @@
+<!--delete_item.html -->
+{% extends 'inventory/base.html' %}
+
+{% block content %}
+	<!-- Content block for delete confirmation page -->
+    <div>
+        <!-- Link to go back to dashboard -->
+		<a href="{% url 'dashboard' %}" class="btn btn-outline-primary my-3 mx-4">Go back</a>
+		<div class="row">
+			<form method="POST" class="col-sm-11 col-md-4 mx-auto mt-5">
+				{% csrf_token %}
+                <!-- Confirmation message -->
+				<h2 class="fw-heavy">Are you sure you want to delete the
+                    item with a manufacturer name of  {{ item.name }}?</h2>
+				<h2 class="fw-heavy" style="color: red;"><BR>This process cannot be undone.</h2>
+				<div>
+                    <!-- Conditionally render the delete button based on user permissions -->
+                    {% if user.is_superuser or user.is_staff %}
+                    <!-- Delete button -->
+					    <button class="btn btn-danger">Delete</button>
+                    {% else %}
+                        <p class="fw-dark"><br><BR><h2>{{ user.get_username }}, you do not have permission to delete items. Only Admin level users are allowed to delete records.
+                        </h2><BR>
+                    {% endif %}
+				</div>
+			</form>
+		</div>
+	</div>
+{% endblock content %}

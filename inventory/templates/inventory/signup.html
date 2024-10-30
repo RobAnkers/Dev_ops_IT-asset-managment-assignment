@@ -1,0 +1,42 @@
+<!--signup.html -->
+{% extends "inventory/base.html" %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+	<div class="row">
+		<div class="col-11 col-md-4 mx-auto mt-5">
+             <!-- Title for the signup form -->
+			<h1>Sign Up</h1>
+            <!-- Display form errors if any -->
+			{% if form.errors %}
+				{% for field in form %}
+					{% for error in field.errors %}
+                        <!-- Display field-specific errors -->
+						<div class="alert alert-danger">
+							<strong>{{ error|escape }}</strong>
+						</div>
+					{% endfor %}
+				{% endfor %}
+				<!-- Display non-field errors -->
+                {% for error in form.non_field_errors %}
+					<div class="alert alert-danger">
+						<strong>{{ error|escape }}</strong>
+					</div>
+				{% endfor %}
+			{% endif %}
+            <!-- Form for signing up -->
+			<form method="post">
+				{% csrf_token %}
+                <!-- Display the form using crispy forms -->
+				{{ form| crispy }}
+
+				<button class="btn btn-primary" type="submit">Sign Up</button>
+			</form>
+            <!-- Link to sign in page -->
+			<div class="pt-3">
+				<small class="text-muted">Do you already have an account? <a href="{% url 'login' %}" class="ml-2">Sign In</a>
+                </small>
+			</div>
+		</div>
+	</div>
+{% endblock content %}

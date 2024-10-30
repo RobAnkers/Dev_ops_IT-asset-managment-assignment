@@ -1,0 +1,39 @@
+<!--navigation.html -->
+<nav class="navbar navbar-expand-lg bg-light">
+	<div class="container-fluid">
+        <!-- Link leading to the index page -->
+		<a class="navbar-brand" href="{% url 'index' %}">Assigned Inventory Manager</a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+			<ul class="navbar-nav">
+				{% if user.is_authenticated %}
+                    <!-- Display user's username when authenticated -->
+					<li class="nav-item">
+						<a class="nav-link" href="#">{{ user.username }}</a>
+					</li>
+                    <!-- Link to log out when authenticated -->
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'simple_logout' %}">Sign Out</a>
+					</li>
+                    <!-- Link to the About page when authenticated -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'about' %}">About</a>
+                    </li>
+				{% else %}
+                    <!-- Link to log in when not authenticated -->
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'login' %}">Sign In</a>
+					</li>
+                    <!-- Link to sign up when not authenticated -->
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
+					</li>
+				{% endif %}
+
+			</ul>
+		</div>
+	</div>
+</nav>

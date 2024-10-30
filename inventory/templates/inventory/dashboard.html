@@ -1,0 +1,84 @@
+<!--Dashboard.html -->
+{% extends 'inventory/base.html' %}
+
+{% block content %}
+	<!-- Check if there are any messages to display -->
+    {% if messages %}
+		<div class="row mt-3">
+            <!-- Loop through each message -->
+			{% for message in messages %}
+                <!-- If the message tag is 'error', display it in a danger alert -->
+				{% if message.tags == 'error' %}
+					<div class="col-md-10 col-12 mx-auto alert alert-danger">
+						{{ message }}
+					</div>
+                    <!-- Otherwise, display it in a success alert -->
+				{% else %}
+					<div class="col-md-10 col-12 mx-auto alert alert-success">
+						{{ message }}
+					</div>
+				{% endif %}
+			{% endfor %}
+		</div>
+	{% endif %}
+    <!-- Start of the main content area -->
+	<div class="row">
+		<div class="col-md-10 col-12 mx-auto mt-5">
+            <!-- Button to add a new item -->
+			<div class="d-flex justify-content-end">
+				<a href="{% url 'add-item' %}" class="btn btn-primary">Add Item to Personal Inv</a>
+			</div>
+            <!-- Admin view button for admin users -->
+            {% if user.is_superuser %}
+                <div class="d-flex justify-content-end mt-3">
+                    <a href="{% url 'admin-view' %}" class="btn btn-primary">View All Users and Equipment</a>
+                </div>
+            {% endif %}
+            <!-- Table to display items -->
+			<table class="table table-hover table-striped">
+				<thead>
+					<tr>
+						<th scope="col">ID</th>
+						<th scope="col">Manufacturer Name</th>
+						<th scope="col">Qty</th>
+						<th scope="col">Category</th>
+						<th scope="col"></th>
+						<th scope="col"></th>
+					</tr>
+				</thead>
+				<tbody>
+					 <!-- If there are no items, display a placeholder row -->
+                    {% if items|length == 0 %}
+					<tr>
+						<th scope="row">-</th>
+						<td>-</td>
+						<td>-</td>
+						<td>-</td>
+						<td>-</td>
+						<td></td>
+					</tr>
+					{% endif %}
+                    <!-- Loop through each item -->
+					{% for item in items %}
+					<tr>
+						<th scope="row">{{ item.id }}</th>
+						<td>{{ item.name }}</td>
+                        <!-- If the item's ID is in the list of low inventory IDs, mark it in red as low -->
+						{% if item.id in low_inventory_ids %}
+							<td class="text-danger">{{ item.quantity }}</td>
+						<!-- Otherwise, display it in green -->
+                        {% else %}
+							<td class="text-success">{{ item.quantity }}</td>
+						{% endif %}
+						<td>{{ item.category.name }}</td>
+                        <!-- Button to edit the item -->
+						<td><a href="{% url 'edit-item' item.id %}" class="btn btn-secondary">Edit</a></td>
+                        <!-- Button to delete the item -->
+						<td><a href="{% url 'delete-item' item.id %}" class="btn btn-secondary">Delete</a></td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+{% endblock content %}

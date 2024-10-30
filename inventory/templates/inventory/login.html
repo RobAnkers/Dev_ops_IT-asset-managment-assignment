@@ -1,0 +1,31 @@
+<!--login.html -->
+{% extends 'inventory/base.html' %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+    
+    <!-- Check to see if user is already logged in -->
+    {% if user.is_authenticated %}
+    <h1>You are already logged in</h1>
+    {% else %}
+<!-- Row for login form -->    
+<div class="row">
+	<!-- Column for login form -->
+    <div class="col-11 col-md-4 mx-auto mt-5">
+		<h1>Log In</h1>
+        <!-- Form for logging in -->
+		<form method="post">
+			{% csrf_token %}
+            <!-- Displaying the form with crispy forms -->
+			{{ form|crispy }}
+            <!-- Button to submit the form -->
+			<button class="btn btn-primary">Sign In</button>
+		</form>
+        <!-- Link to sign up page -->
+		<div class="pt-3">
+			<small class="text-muted">Do you need an account? <a href="{% url 'signup' %}" class="ml-2">Sign Up</a></small>
+		</div>
+	</div>
+</div>
+    {% endif %}
+{% endblock content %}
