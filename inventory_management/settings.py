@@ -83,11 +83,12 @@ DATABASES = {
    }
 }
 """""
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'inventory_project',    # Database name
-        'USER': 'postgres',               # Username
+        'USER': 'postgres',             # Username
         'PASSWORD': 'password',         # Password for the user
         'HOST': 'localhost',            # Database host, usually localhost
         'PORT': '5432',                 # Default PostgreSQL port
