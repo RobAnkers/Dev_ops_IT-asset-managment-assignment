@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
+import dj_database_url
 import os
 
 from pathlib import Path
@@ -84,7 +85,16 @@ DATABASES = {
    }
 }
 """""
+DATABASES = {
+    'default': dj_database_url.config(
+        default=os.getenv(
+            'DATABASE_URL',
+            'postgresql://postgres:password@localhost:5432/inventory_project'
+        )
+    )
+}
 
+"""""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -95,7 +105,7 @@ DATABASES = {
         'PORT': '5432',                 # Default PostgreSQL port
     }
 }
-
+"""""
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
