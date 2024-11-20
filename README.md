@@ -1,8 +1,7 @@
 # Digital & Technology Solutions
 #     Degree Apprenticeship
 
-Software Engineering & Agile (QAC020N227S)
-Assignment March 22, 2024
+
 
 Rob Ankers
 
