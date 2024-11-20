@@ -14,6 +14,7 @@ import os
 import environ
 
 from pathlib import Path
+from decouple import config
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -29,10 +30,11 @@ environ.Env.read_env()
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-3cm+m__g#$3*z%=1s&c9egh9guqy63o&z3x*9r)0ek^)j11pad"
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = config('DEBUG', cast=bool)
+
 
 ALLOWED_HOSTS = [
     'dev-ops-it-asset-managment-assignment.onrender.com',
