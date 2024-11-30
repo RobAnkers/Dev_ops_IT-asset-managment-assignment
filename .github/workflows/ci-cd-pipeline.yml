@@ -74,4 +74,4 @@ jobs:
           curl -X POST \
           -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
           -d '{}' \
-          https://api.render.com/deploy/srv-<YOUR-SERVICE-ID>
+          https://api.render.com/deploy/srv-rnd_oAkmvEXKQDfMz0jq1c1gR6bFNLD2
