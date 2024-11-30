@@ -38,7 +38,7 @@ jobs:
       - name: Run Bandit security check
         run: |
           pip install bandit
-          bandit -r . -f html -o bandit-report.html
+          bandit -r . -f html -o j:\bandit-report.html
 
       - name: Upload Bandit Report
         uses: actions/upload-artifact@v3
