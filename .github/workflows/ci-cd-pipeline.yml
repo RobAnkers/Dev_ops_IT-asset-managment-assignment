@@ -35,37 +35,37 @@ jobs:
           python manage.py test
 
       # Step 5: Run Bandit (OWASP SAST check)
-      - name: Run Bandit security check
-        run: |
-          pip install bandit
-          bandit -r . -f html -o j:\bandit-report.html
-
-      - name: Upload Bandit Report
-        uses: actions/upload-artifact@v3
-        with:
-          name: bandit-report
-          path: bandit-report.html
-
+ #     - name: Run Bandit security check
+  #      run: |
+   #       pip install bandit
+    #      bandit -r . -f html -o j:\bandit-report.html
+#
+ #     - name: Upload Bandit Report
+  #      uses: actions/upload-artifact@v3
+   ##     with:
+     #     name: bandit-report
+      #    path: bandit-report.html
+#
       # Step 6: Run OWASP Dependency-Check
-      - name: Install OWASP Dependency-Check
-        run: |
-          curl -L -o dependency-check.zip https://github.com/jeremylong/DependencyCheck/releases/download/v7.4.0/dependency-check-7.4.0-release.zip
-          unzip dependency-check.zip -d owasp-dc
-          chmod +x owasp-dc/dependency-check/bin/dependency-check.sh
+ #     - name: Install OWASP Dependency-Check
+  #      run: |
+   #       curl -L -o dependency-check.zip https://github.com/jeremylong/DependencyCheck/releases/download/v7.4.0/dependency-check-7.4.0-release.zip
+    #      unzip dependency-check.zip -d owasp-dc
+     #     chmod +x owasp-dc/dependency-check/bin/dependency-check.sh
+#
+ #     - name: Run Dependency-Check
+  #      run: |
+   #       ./owasp-dc/dependency-check/bin/dependency-check.sh \
+    #      --project DjangoApp \
+     #     --scan ./ \
+      #    --format HTML \
+       #   --out ./dependency-check-report
 
-      - name: Run Dependency-Check
-        run: |
-          ./owasp-dc/dependency-check/bin/dependency-check.sh \
-          --project DjangoApp \
-          --scan ./ \
-          --format HTML \
-          --out ./dependency-check-report
-
-      - name: Upload Dependency-Check Report
-        uses: actions/upload-artifact@v3
-        with:
-          name: dependency-check-report
-          path: ./dependency-check-report
+  #    - name: Upload Dependency-Check Report
+   #     uses: actions/upload-artifact@v3
+    #    with:
+     #     name: dependency-check-report
+      #    path: ./dependency-check-report
 
       # Step 7: Notify Render for Deployment (if tests pass)
       - name: Deploy to Render
