@@ -1,7 +1,7 @@
 # models.py
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.utils.html import escape
 
 # Model representing an inventory item
 class InventoryItem(models.Model):
@@ -21,6 +21,11 @@ class InventoryItem(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     assigned_date = models.DateTimeField(auto_now_add=True)
 
+    # Override save method to sanitize input
+    def save(self, *args, **kwargs):
+        self.name = escape(self.name)  # Remove HTML tags from the name field
+        super().save(*args, **kwargs)
+
     # Method returning a string representation of the item
     def __str__(self):
         return self.name
@@ -29,6 +34,11 @@ class InventoryItem(models.Model):
 class Category(models.Model):
     # Field to store the name of the category
     name = models.CharField(max_length=200)
+
+    # Sanitize input by overriding save method
+    def save(self, *args, **kwargs):
+        self.name = escape(self.name)  # Remove HTML tags from the name field
+        super().save(*args, **kwargs)
 
     # Metadata for the model
     class Meta:
