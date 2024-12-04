@@ -1,7 +1,8 @@
 # models.py
+
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils.html import escape
+from django.utils.html import strip_tags
 
 # Model representing an inventory item
 class InventoryItem(models.Model):
@@ -23,7 +24,11 @@ class InventoryItem(models.Model):
 
     # Override save method to sanitize input
     def save(self, *args, **kwargs):
-        self.name = escape(self.name)  # Remove HTML tags from the name field
+        if self.quantity < 0:
+            raise ValueError("Quantity cannot be negative.")
+        # Only sanitize if there is potential XSS content
+        if "<script>" in self.name or "<img" in self.name:
+            self.name = strip_tags(self.name)  # Only strip if potentially harmful content
         super().save(*args, **kwargs)
 
     # Method returning a string representation of the item
@@ -37,12 +42,14 @@ class Category(models.Model):
 
     # Sanitize input by overriding save method
     def save(self, *args, **kwargs):
-        self.name = escape(self.name)  # Remove HTML tags from the name field
+        # Only sanitize if potentially harmful content exists
+        if "<script>" in self.name or "<img" in self.name:
+            self.name = strip_tags(self.name)  # Only strip if potentially harmful content
         super().save(*args, **kwargs)
 
     # Metadata for the model
     class Meta:
-        # Creat the plural form of the model
+        # Create the plural form of the model
         verbose_name_plural = "categories"
 
     # Method returning a string representation of the category
