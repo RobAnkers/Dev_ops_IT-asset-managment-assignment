@@ -44,6 +44,8 @@ Rob Ankers December 2024
     Internal Admin screen
     - Admin account - username admin42, password password42
     - Admin screen - 127.0.0.1/admin
+    - User account testuser42/password42
+  
 
     External Admin Screen
     - https://dev-ops-it-asset-managment-assignment.onrender.com/admin

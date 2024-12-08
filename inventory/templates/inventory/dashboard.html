@@ -26,7 +26,7 @@
 		<div class="col-md-10 col-12 mx-auto mt-5">
             <!-- Button to add a new item -->
 			<div class="d-flex justify-content-end">
-				<a href="{% url 'add-item' %}" class="btn btn-primary">Add Item to Personal Inv</a>
+				<a href="{% url 'add-item' %}" class="btn btn-primary">Add or Remove Item to Personal Inv</a>
 			</div>
             <!-- Admin view button for admin users -->
             {% if user.is_superuser %}
