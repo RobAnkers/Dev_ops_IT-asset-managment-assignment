@@ -3,7 +3,7 @@
 
 Software Engineering & DevOps (QAC020X328A)
 
-Rob Ankers
+Rob Ankers December 2024
 
 
 
@@ -41,7 +41,14 @@ Rob Ankers
     - By doing this everyone's virtual environment will remain up to date.
 
 ## Useful Information
-    - Admin account - username admin, password admin
+    Internal Admin screen
+    - Admin account - username admin42, password password42
     - Admin screen - 127.0.0.1/admin
+
+    External Admin Screen
+    - https://dev-ops-it-asset-managment-assignment.onrender.com/admin
+    Login Screen
+    - https://dev-ops-it-asset-managment-assignment.onrender.com/
+    
 
 

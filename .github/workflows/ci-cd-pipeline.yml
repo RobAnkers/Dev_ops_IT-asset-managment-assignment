@@ -1,3 +1,4 @@
+#ci-cd-pipeline.yml
 name: Django CI/CD Pipeline
 
 on:
@@ -10,29 +11,32 @@ on:
 
 jobs:
   test-and-secure:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Use the latest Ubuntu runner for the job
 
     steps:
       # Step 1: Check out the repository
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3 # This action checks out the repository's code
+
 
       # Step 2: Set up Python environment
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v4 # This action sets up Python on the runner
         with:
-          python-version: '3.10'
+          python-version: '3.10'  # Use Python version 3.10
 
       # Step 3: Install dependencies
+      # Upgrade pip to the latest version
+      # Install dependencies from the requirements.txt file
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install -r requirements.txt 
 
       # Step 4: Run Django tests
-      - name: Run Django tests
+      - name: Run Django tests # Run the Django tests to verify code integrity
         run: |
-          python manage.py test
+          python manage.py test 
 
       # Step 5: Run Bandit (OWASP SAST check)
  #     - name: Run Bandit security check
@@ -69,7 +73,7 @@ jobs:
 
       # Step 7: Notify Render for Deployment (if tests pass)
       - name: Deploy to Render
-        if: success()
+        if: success()  # Only deploy if the tests were successful
         run: |
           curl -X POST \
           -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
