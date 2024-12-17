@@ -30,7 +30,7 @@ class InventoryItem(models.Model):
     def save(self, *args, **kwargs):
         if self.quantity < 0:
             raise ValueError("Quantity cannot be negative.")
-        # Sanitize name input if it contains potentially harmful HTML or JavaScript code
+        # Sanitise name input if it contains potentially harmful HTML or JavaScript code
         if "<script>" in self.name or "<img" in self.name:
             self.name = strip_tags(self.name)   # Strip tags to avoid XSS
         # Call the parent class save method to actually save the item to the database
@@ -45,7 +45,7 @@ class Category(models.Model):
     # Field to store the name of the category
     name = models.CharField(max_length=200)
 
-    # Sanitize input by overriding save method to remove harmful content
+    # Sanitise input by overriding save method to remove harmful content
     def save(self, *args, **kwargs):
         # Strip harmful HTML or JavaScript tags from the category name before saving
         if "<script>" in self.name or "<img" in self.name:
